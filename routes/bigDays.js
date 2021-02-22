@@ -1,11 +1,16 @@
 const express = require('express');
+const {
+  getBigDays,
+  addBigDay,
+  deleteBigDay,
+} = require('../controllers/bigDays');
 
 // init Router
 const router = express.Router();
 
 // root Router
-router.get('/', (req, res) => {
-  res.send('Hello BigDay Router');
-});
+router.route('/').get(getBigDays).post(addBigDay);
+
+router.route('/:id').delete(deleteBigDay);
 
 module.exports = router;
