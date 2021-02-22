@@ -9,6 +9,9 @@ const app = express();
 dotenv.config({ path: './config/config.env' });
 // init route
 const bigDays = require('./routes/bigDays');
+// init db
+const connectDB = require('./config/db');
+connectDB();
 
 // setup PORT
 const PORT = process.env.PORT || 5000;
