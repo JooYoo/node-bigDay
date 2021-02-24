@@ -54,8 +54,30 @@ const addBigDay = async (req, res, next) => {
 // @desc   remove bigDay
 // @route  DELETE /api/v1/bigDays/:id
 // @access Public
-const deleteBigDay = (req, res, next) => {
-  res.send('DELETE bigDay');
+const deleteBigDay = async (req, res, next) => {
+  try {
+    // get the delete record by id
+    const bigDay = await BigDay.findById(req.params.id);
+    // can NOT found record response
+    if (!bigDay) {
+      return res.status(404).json({
+        success: false,
+        error: 'No BigDay found',
+      });
+    }
+    // remove the record
+    await bigDay.remove();
+    // remove success response
+    return res.status(500).json({
+      success: true,
+      data: {},
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
 };
 
 module.exports = {
