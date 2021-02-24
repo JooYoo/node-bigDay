@@ -13,6 +13,9 @@ const bigDays = require('./routes/bigDays');
 const connectDB = require('./config/db');
 connectDB();
 
+// enable BodyParser to allow add new data as json
+app.use(express.json());
+
 // setup PORT
 const PORT = process.env.PORT || 5000;
 
