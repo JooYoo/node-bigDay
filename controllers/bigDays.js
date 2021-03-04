@@ -68,7 +68,7 @@ const deleteBigDay = async (req, res, next) => {
     // remove the record
     await bigDay.remove();
     // remove success response
-    return res.status(500).json({
+    return res.status(200).json({
       success: true,
       data: {},
     });
