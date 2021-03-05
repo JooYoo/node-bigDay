@@ -20,6 +20,40 @@ const getBigDays = async (req, res, next) => {
   }
 };
 
+// @desc   update bigDays
+// @route  PATCH /api/v1/bigDays/:id
+// @access Public
+const updateBigDay = async (req, res, next) => {
+  try {
+    // setup params
+    const id = req.params.id;
+    const updates = req.body;
+    const options = { new: true };
+
+    // update record by id
+    const bigDay = await BigDay.findByIdAndUpdate(id, updates, options);
+
+    // res: NOT found
+    if (!bigDay) {
+      return res.status(404).json({
+        success: false,
+        error: 'No BigDay found',
+      });
+    }
+
+    // res: success
+    return res.status(200).json({
+      success: true,
+      data: bigDay,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: 'Server Error',
+    });
+  }
+};
+
 // @desc   add new bigDay
 // @route  POST /api/v1/bigDays
 // @access Public
@@ -82,6 +116,7 @@ const deleteBigDay = async (req, res, next) => {
 
 module.exports = {
   getBigDays,
+  updateBigDay,
   addBigDay,
   deleteBigDay,
 };

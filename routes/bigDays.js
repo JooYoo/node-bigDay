@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getBigDays,
+  updateBigDay,
   addBigDay,
   deleteBigDay,
 } = require('../controllers/bigDays');
@@ -10,7 +11,6 @@ const router = express.Router();
 
 // root Router
 router.route('/').get(getBigDays).post(addBigDay);
-
-router.route('/:id').delete(deleteBigDay);
+router.route('/:id').patch(updateBigDay).delete(deleteBigDay);
 
 module.exports = router;
