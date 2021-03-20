@@ -5,6 +5,15 @@ const morgan = require('morgan');
 
 // init express
 const app = express();
+// deployment: fix CORS
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
 // init env
 dotenv.config({ path: './config/config.env' });
 // init route
